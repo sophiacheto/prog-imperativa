@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 int main() {
     int primeiro, segundo, terceiro, mediana;
@@ -10,11 +11,12 @@ int main() {
     scanf("%d", &segundo);
     
     printf("\nTerceiro valor: ");
-    scanf("%d", &primeiro);  
+    scanf("%d", &terceiro);  
 
-    if (primeiro <= segundo )
+    mediana = primeiro + segundo + terceiro - min(primeiro, segundo, terceiro) - max(primeiro, segundo, terceiro);
 
     printf("\nMediana: %d", mediana);
+
 }
 
 
