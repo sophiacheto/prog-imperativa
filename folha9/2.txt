@@ -1,0 +1,9 @@
+1. printf("%d",i); OK
+2. scanf("%d",i);  X --> scanf("%d", &i)
+3. scanf("%d",&i); OK
+4. printf("%d",p); X --> printf("%d", *p)
+5. printf("%d",*p); OK
+6. scanf("%d",p); OK
+7. printf("%p",p); OK
+8. printf("%p",i); X --> printf("%p", &i)
+9. printf("%p",*p); X 

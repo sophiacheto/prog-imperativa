@@ -1,0 +1,54 @@
+1. p = i;   -- INVALIDO (int* != int)
+2. *p = i;  -- p aponta para o valor i (i é colocado no espaço para qual p aponta)
+3. p = &q;  -- INVALIDO (int* != (int *) *)
+4. p = &i;  -- p aponta para o valor i (p aponta para o endereço de i)
+5. &i = p;  -- INVÁLIDO pois mudaria o valor de lugar na memória
+6. p = q;   -- p passa a apontar pro msm lugar que q
+7. p = *q;  -- INVALIDO (int* != int)
+8. *p = q;  -- INVALIDO (int != int*)
+9. *p = *q; -- o valor inteiro que q aponta passa a estar no lugar que p aponta
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+
+i - valor inteiro
+&i - endereço em que está guardado i
+p - endereço de um inteiro da memória
+*p - valor que está no espaço da memória para qual p aponta
+&p - endereço em que está guardado p
+
+
+(int *) p
+(int *) &i
+((int *) *) &q
+int *p
+
+
+
+
+
+
+
+TIPOS
+(int *) p
+(int *) q
+(int) i
+(int) *p
+(int) *q
+(int *) &i
+(int *)* &p
+(int *)* &q
+
+1. INVALIDO (int *) /= int
+2. VALIDO   
+3. INVALIDO (int *) /= (int *)*
+4. VALIDO
+5. inválido, pois não é possível mudar o endereço de uma variável
+6. VALIDO
+7. INVALIDO (int *) /= int
+8. INVALIDO  int /= (int *)
+9. VALIDO
+
+
+
+
