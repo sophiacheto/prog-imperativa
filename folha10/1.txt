@@ -1,0 +1,4 @@
+1. struct ponto ( double x, y )  --> struct ponto { double x, y; };
+2. struct ponto { double x, double y }; --> struct ponto { double x; double y; };
+3. struct ponto { double x; double y }  --> struct ponto { double x; double y; };
+4. struct ponto { double x; double y; } --> struct ponto { double x; double y; };
