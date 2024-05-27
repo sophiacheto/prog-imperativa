@@ -37,7 +37,7 @@ int partition(int vec[], int l, int u) {
 
     realocar_mediana(vec, l, u);
     m = l; // m: indice do ponto médio
-    for(i = l; i<=u; i++) {
+    for(i = l+1; i<=u; i++) {
         if(vec[i] < vec[l]) { // fora de ordem
             m++;
             temp = vec[i]; // trocar vec[i], vec[m]
