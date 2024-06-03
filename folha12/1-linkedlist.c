@@ -120,33 +120,33 @@ NODE *vec2list(int vec[], int num) {
 
 ////////// ex. 3
 
-void print_ord(NODE vec[], int qtd) {
+void print_ord(NODE *vec[], int qtd) {
     for (int i=0; i<qtd; i++) {
-        NODE menor = vec[i];
+        int menor = vec[i]->info;
         int indice_menor = i;
         
         for (int j=i+1; j<qtd; j++) {
-            if (vec[j].info < menor.info) {
-                menor = vec[j];
+            if (vec[j]->info < menor) {
+                menor = vec[j]->info;
                 indice_menor = j;
             }
         }
-        NODE temp;
-        temp = menor;
+        NODE *temp;
+        temp = vec[indice_menor];
         vec[indice_menor] = vec[i];
         vec[i] = temp;
     }
 
     for (int i=0; i<qtd; i++)
-        printf("%d\n", vec[i].info);
+        printf("%d\n", vec[i]->info);
 
 }
 
 void imprimir_ord(NODE *first, int num_elementos) {
-    NODE aux[num_elementos];    
+    NODE *aux[num_elementos];    
 
     for (int i=0; i<num_elementos; i++) {
-        aux[i] = *first;
+        aux[i] = first;
         first=first->next;
     }
 

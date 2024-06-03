@@ -127,6 +127,23 @@ int escrever(NODE *registo, char *nome_ficheiro) {
 
 }
 
+
+
+// int escrever(NODE *registo, char *nome_ficheiro) {
+//     int retornar = 0;
+//     FILE *fp = fopen(nome_ficheiro, "ab");
+
+//     while (registo!=NULL) {
+//         retornar += fwrite (registo, sizeof (FICHA), 1, fp);
+//         registo=registo->next;
+//     }
+
+
+//     fclose(fp);
+//     return retornar;
+// }
+
+
 void printar_arquivo(char *nome) {
     FILE *fp = fopen(nome, "rb");
     FICHA lista[100];
