@@ -1,0 +1,291 @@
+STRINGS
+
+puts(str) - printa
+printf("%s\n", str) - printa
+
+fgets(str, tamanho, stdin) - pega a string escrita no stdin e passa para o char[] str
+scanf("%s", str) - lê até um separador (espaço inclusive)
+
+
+VARIAVEIS MULTI-DIMENSIONAIS ===============
+
+Declarar ----
+int a[3][2];
+
+Aceder a elementos -----
+a[i] = linha i
+a[i][j] = elemento j da linha i
+
+Inicializar ------
+int a[2][3] = { {1,2,3},
+                {4,5,6} };
+int a[3][4] = { 1,2,3,4,5,6,7,8,9,10,11,12 };
+int a[3][4] = { 0 };  // incializa todos com 0
+
+Declaração de funções ----
+Podemos omitir o tamanho da primeira dimensão:
+int somar (int a[][M])
+Ou seja, as funções de matrizes só se aplicam a matrizes com
+um determinado tamanho (qtd de colunas)
+
+
+
+
+
+ERROS ========================
+
+Compilar ficheiro para debugar:
+gcc -g nome.c -o nome
+
+Abrir debugger:
+gdb nome
+
+Comandos:
+break fun       // breakpoint no início da função
+break n         // breakpoint na linha n
+print var       // mostra o valor de uma variável no momento
+display var     // mostra o valor de uma variável a cada step executado
+run             // executa programa do início
+next            // executa a próxima linha
+step            // executa a próxima linha (entrando nas funções)
+continue        // continua a execução até o próximo breakpoint
+quit            // finaliza
+
+
+
+ASSERÇÕES
+
+#include <assert.h>
+
+assert (int cond)   // se condição for verdadeira, não faz nada
+                    // se condição for falsa, para a execução
+
+
+
+
+
+PESQUISA ================
+
+
+Sequencial ------------
+Percorre todos os elementos da lista e, se algum tiver o valor correto, detecta verdadeiro
+O(n)
+
+
+Binária ---------------
+A lista deve estar ordenada
+> int binaria(int vec[], int tamanho, int valor)
+> int inicio, int fim;
+
+Se valor < v[meio], procuramos entre v[0] e v[meio-1]
+Se valor > v[meio], procuramos entre v[meio+1] e v[fim]
+Se valor = v[meio], encontramos
+
+O(log n)
+
+
+
+
+ORDENAÇÃO ============
+
+
+Seleção -----------------
+Pra cada posição n da lista (1,2,3,4...), percorro o resto da lista procurando o n° menor elemento 
+e troco ele com o elemento da posição n
+A cada iteração (posição analisada), a lista à sua esquerda está ordenada e o resto não sabemos
+O(n²)
+
+
+Inserção -----------------
+Para cada elemento (começando pela esq), guardo ele numa variável x e percorro 
+a sublista à sua esquerda, passando cada elemento à direita. Quando x for menor ou igual 
+ao elemento atual, adiciono x nessa posição
+A cada iteração, a sublista à esquerda do elemento está ordenada e possui os mesmos valores
+que existiam nesse intervalo, só que agora ordenados
+O(n²)
+
+
+Quicksort ----------------
+Pego o primeiro elemento da lista, tomo como pivot e inicio uma divisão do resto da lista
+em duas sublistas; percorro os outros elementos à sua direita e, para cada um:
+se for menor que o pivot, coloco no final da primeira sublista; se for maior, deixo à direita
+Para a próxima iteração, chamo recursivamente a ordenação sobre a lista à esquerda e à direita
+O(nlogn)
+
+
+
+
+
+ESTRUTURAS =============
+
+struct nome {
+    tipo atributo;
+    tipo atributo, atributo;
+};
+
+Inicializar:
+struct nome x = {var, var, var};
+
+Acessar atributos:
+nome.atributo
+
+
+
+TYPEDEF:
+typedef struct nome {
+    tipo atributo;
+} NOME;
+
+
+UNIAO (passada como um dos atributos):
+typedef struct nome {
+    tipo atributo;
+    union {
+        int i;
+        float f;
+    } numero;
+} NOME;
+
+
+ENUM:
+Associa cada valor de um conjunto a um número
+enum tipo_num {INTEIRO, FLOATING} tipo
+
+typedef struct nome {
+    tipo atributo;
+    enum tipo_num tipo;
+    union {
+        int i;
+        float f;
+    } numero;
+} NOME;
+
+
+
+
+APONTADORES ================
+
+Declarar:
+int *p;
+
+Inicializar:
+p = &inteiro
+
+Mudar o valor:
+*p=10;
+
+Apontar para outro lugar:
+p = q (sendo q um apontador para um inteiro)
+// p passa a apontar para o mesmo lugar que q
+
+Apontador para apontador:
+int **pp;
+pp = &p;
+
+Trocar os valores de dois inteiros:
+void trocar(int *pa, int *pb) {
+    int temp;
+    temp = *pa;
+    *pa = *pb;
+    *pb = temp;
+}
+
+
+APONTADOR NULO
+#inlcude <stdlib.h>
+
+
+
+
+RESERVA DE MEMÓRIA ======================
+#include <stdlib.h>
+
+
+Reservar:
+int *vec = (int *) malloc(qtd_de_bytes)
+ou
+int *vec;
+vec = (char *) malloc(qtd_de_bytes)
+
+Libertar:
+free(vec)
+
+Reservar memória para vetores:
+int *vec = (int *) calloc(qtd_de_elementos, tamanho_do_elemento)
+
+
+
+
+
+FICHEIROS DE TEXTO ===========
+#include <stdio.h>
+
+
+Abrir ficheiro:
+> FILE *fp = fopen(nome, modo)
+modo pode ser "r" (read), "w" (write), "a" (add)
+
+Fechar ficheiro:
+> fclose(fp);
+
+Escrever no ficheiro:
+> fprintf(fp, "%d\n", num);
+ou 
+> fputs(string, fp);
+
+Ler do ficheiro:
+> fscanf(fp, "%d", &num);
+Retorna EOF quando chega ao fim
+ou
+> fgets(var_str, max_size, fp)
+
+
+REPOSICIONAR O APONTADOR:
+> fseek(fp, qtd_de_bytes, especificador)
+especificador pode ser SEEK_SET (a partir do inicio do ficheiro)
+                       SEEK_CUR (a partir da posição atual do apontador)
+                       SEEK_END (a partir do fim do ficheiro)
+
+* fseek(fp, 0L, SEEK_SET) = rewind(fp)
+
+
+
+POSIÇÃO INTERNA DO APONTADOR
+> ftell(fp)
+Quando no início, retorna a posição do seu primeiro byte 
+Quando no fim, retorna o número de bytes do ficheiro
+
+
+
+
+
+FICHEIROS BINÁRIOS ===============
+
+Abrir ficheiro:
+Modos: "wb", "rb", "rb+" 
+
+Escrever no ficheiro:
+> fwrite(vetor, tamanho_de_um_elemento, num_de_elementos, fp)
+Retorna a qtd de elementos escritos
+
+Escrever num vetor os elementos lidos no ficheiro:
+> fread(vetor, tamanho_de_um_elemento, qtd_de_elementos, fp)
+Retorna a qtd de elementos
+
+Escrever um dado complexo no ficheiro:
+> fwrite (&data, sizeof (struct Data), 1, fp);
+
+Escrever uma lista de dados complexos:
+> fwrite (lista, size_de_um_elemento, qtd_de_elementos, fp);
+
+
+
+
+
+PARAMETROS DA FUNÇÃO MAIN ==================
+> int main(int argc, char *argv[])
+
+argc = qtd de argumentos passados
+argv = vetor de strings
+argv[0] = nome do ficheiro
+arg[i] = nome do i° argumento
